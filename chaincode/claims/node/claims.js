@@ -81,7 +81,7 @@ let Chaincode = class {
 
   async createClaim(stub, args) {
     console.info('============= START : Create Claim ===========');
-    if (args.length != 5) {
+    if (args.length != 3) {
       throw new Error('Incorrect number of arguments. Expecting 5');
     }
 
