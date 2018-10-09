@@ -121,6 +121,7 @@ services:
     depends_on:
       - orderer.example.com
       - couchdb
+      - peer0.org1.example.com
     networks:
       - basic
 
