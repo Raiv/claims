@@ -85,7 +85,7 @@ services:
     networks:
       - basic
 
- peer1.org1.example.com:
+  peer1.org1.example.com:
     container_name: peer1.org1.example.com
     image: hyperledger/fabric-peer
     environment:
