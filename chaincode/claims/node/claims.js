@@ -71,7 +71,7 @@ let Chaincode = class {
       let claim ={
         date: Date.now-DAY+HOUR*i,
         text: this.makeNoise(),
-        docType = 'claim'
+        docType: 'claim'
       }
       await stub.putState('CLAIM' + i, Buffer.from(JSON.stringify(claim)));
       console.info('Added <--> ', claim);
