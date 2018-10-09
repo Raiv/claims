@@ -113,6 +113,7 @@ services:
     # command: peer node start --peer-chaincodedev=true
     ports:
       - 8051:7051
+      - 8052:7052
       - 8053:7053
     volumes:
         - /var/run/:/host/var/run/
