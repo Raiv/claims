@@ -226,4 +226,4 @@ class FabricUser{
 }
 
 
-module.exports.fabricUser = new FabricUser();
+module.exports = new FabricUser();

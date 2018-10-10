@@ -1,6 +1,6 @@
 'use strict';
 
-const fabricUser = require("../fabric/fabricuser").FabricUser;
+const fabricUser = require("../fabric/fabricuser");
 
 class Claim {
     constructor(id,date,text) {
