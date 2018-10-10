@@ -51,9 +51,13 @@ class FabricUser{
 
     toStringArray(input){
         let array = [];
-        input.array.forEach(element => {
-            array.push(element.toString());
-        });
+        if(input===undefined){
+            array.push("");
+        }else{
+            input.array.forEach(element => {
+                array.push(element.toString());
+            });
+        }
         return array;
     }
 
