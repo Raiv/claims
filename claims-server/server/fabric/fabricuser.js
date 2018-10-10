@@ -17,7 +17,7 @@ class FabricUser{
 
 
         let member_user_tmp=null;
-        this.store_path = path.join(__dirname, '../../../claims/hfc-key-store');
+        let store_path = path.join(__dirname, '../../../claims/hfc-key-store');
         console.log('Store path:'+store_path);
         this.tx_id = null;
 
@@ -45,6 +45,7 @@ class FabricUser{
         this.member_user=member_user_tmp;
         this.channel=channel;
         this.peer =peer;
+        this.store_path=store_path;
 
     }
 
