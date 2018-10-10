@@ -10,15 +10,15 @@ const util = require('util');
 
 let Chaincode = class {
 
-  // The Init method is called when the Smart Contract 'fabcar' is instantiated by the blockchain network
+  // The Init method is called when the Smart Contract 'claims' is instantiated by the blockchain network
   // Best practice is to have any Ledger initialization in separate function -- see initLedger()
   async Init(stub) {
-    console.info('=========== Instantiated fabcar chaincode ===========');
+    console.info('=========== Instantiated claims chaincode ===========');
     return shim.success();
   }
 
   // The Invoke method is called as a result of an application request to run the Smart Contract
-  // 'fabcar'. The calling application program has also specified the particular smart contract
+  // 'claims'. The calling application program has also specified the particular smart contract
   // function to be called, with arguments
   async Invoke(stub) {
     let ret = stub.getFunctionAndParameters();
@@ -44,7 +44,7 @@ let Chaincode = class {
     }
     let claimNumber = args[0];
 
-    let claimAsBytes = await stub.getState(claimNumber); //get the car from chaincode state
+    let claimAsBytes = await stub.getState(claimNumber); //get the claim from chaincode state
     if (!claimAsBytes || claimAsBytes.toString().length <= 0) {
       throw new Error(claimNumber + ' does not exist: ');
     }
@@ -82,7 +82,7 @@ let Chaincode = class {
   async createClaim(stub, args) {
     console.info('============= START : Create Claim ===========');
     if (args.length != 3) {
-      throw new Error('Incorrect number of arguments. Expecting 5');
+      throw new Error('Incorrect number of arguments. Expecting 3');
     }
 
     var claim = {
@@ -92,7 +92,7 @@ let Chaincode = class {
     };
 
     await stub.putState(args[0], Buffer.from(JSON.stringify(claim)));
-    console.info('============= END : Create Car ===========');
+    console.info('============= END : Create Claim ===========');
   }
 
   async queryAllClaims(stub, args) {
