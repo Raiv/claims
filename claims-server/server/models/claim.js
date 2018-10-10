@@ -28,4 +28,4 @@ class Claim {
  }
 
 
-module.exports.Claim = Claim;
+module.exports = Claim;
