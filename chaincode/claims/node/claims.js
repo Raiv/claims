@@ -52,7 +52,7 @@ let Chaincode = class {
     return claimAsBytes;
   }
 
-   makeNoise() {
+  makeNoise() {
     let text = "";
     let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let genLength =Math.random() * 50+5;
@@ -70,7 +70,7 @@ let Chaincode = class {
     for (let i = 0; i < 10; i++) {
       let claim ={
         date: (Date.now()-DAY+HOUR*i),
-        text: this.makeNoise(),
+        text: makeNoise(),
         docType: 'claim'
       }
       await stub.putState('CLAIM' + i, Buffer.from(JSON.stringify(claim)));
