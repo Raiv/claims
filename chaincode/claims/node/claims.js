@@ -69,7 +69,7 @@ let Chaincode = class {
     const DAY=HOUR*24;
     for (let i = 0; i < 10; i++) {
       let claim ={
-        date: Date.now-DAY+HOUR*i,
+        date: (Date.now()-DAY+HOUR*i),
         text: this.makeNoise(),
         docType: 'claim'
       }
