@@ -102,7 +102,7 @@ let Chaincode = class {
         docType:"claim"
       }
     }
-    let iterator = await stub.getStateByQuery(JSON.stringify(query));
+    let iterator = await stub.getQueryResult(JSON.stringify(query));
 
     let allResults = [];
     while (true) {
