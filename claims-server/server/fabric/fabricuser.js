@@ -51,7 +51,7 @@ class FabricUser{
 
     toStringArray(input){
         let array = [];
-        if(input===undefined){
+        if(typeof(input)===undefined){
             array.push("");
         }else{
             input.array.forEach(element => {
