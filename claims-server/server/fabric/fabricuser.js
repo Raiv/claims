@@ -9,7 +9,7 @@ class FabricUser{
 
     constructor(){
         //
-        this.fabric_client = new Fabric_Client();
+        let fabric_client = new Fabric_Client();
         // setup the fabric network
         this.channel = fabric_client.newChannel('mychannel');
         this.peer = fabric_client.newPeer('grpc://localhost:7051');
