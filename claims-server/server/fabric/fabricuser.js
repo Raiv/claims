@@ -11,8 +11,8 @@ class FabricUser{
         //
         let fabric_client = new Fabric_Client();
         // setup the fabric network
-        this.channel = fabric_client.newChannel('mychannel');
-        this.peer = fabric_client.newPeer('grpc://localhost:7051');
+        let channel = fabric_client.newChannel('mychannel');
+        let peer = fabric_client.newPeer('grpc://localhost:7051');
         channel.addPeer(peer);
 
 
@@ -43,6 +43,8 @@ class FabricUser{
             }
         });
         this.member_user=member_user_tmp;
+        this.channel=channel;
+        this.peer =peer;
 
     }
 
@@ -103,6 +105,7 @@ class FabricUser{
 
         let argsArray = Array.prototype.slice.call(arguments);
         let funcName = argsArray.shift();
+        let channel = this.channel;
 
             // get a transaction id object based on the current user assigned to fabric client
         let tx_id = fabric_client.newTransactionID();
