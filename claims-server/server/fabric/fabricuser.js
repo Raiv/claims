@@ -126,7 +126,6 @@ class FabricUser{
             chaincodeId: 'claims',
             fcn: funcName,
             args: obj.toStringArray(argsArray),
-            chainId: 'mychannel',
             txId: tx_id
         };
 
