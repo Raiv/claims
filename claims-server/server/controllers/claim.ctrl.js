@@ -33,7 +33,7 @@ module.exports = {
         Claim.findById((err, claim)=> {
             if (err)
                 res.send(err)
-            else if (!article)
+            else if (!claim)
                 res.send(404)
             else
                 res.send(claim)
