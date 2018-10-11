@@ -46,6 +46,7 @@ class FabricUser{
         this.channel=channel;
         this.peer =peer;
         this.store_path=store_path;
+        this.fabric_client=fabric_client;
 
     }
 
@@ -108,14 +109,13 @@ class FabricUser{
         if(arguments.length<2){
             throw new Error('Invoke without args!');
         }
-
+        let obj=this;
         let argsArray = Array.prototype.slice.call(arguments);
         let cb = argsArray.shift();
         let funcName = argsArray.shift();
-        let channel = this.channel;
-
+        
             // get a transaction id object based on the current user assigned to fabric client
-        let tx_id = fabric_client.newTransactionID();
+        let tx_id = obj.fabric_client.newTransactionID();
         console.log("Assigning transaction_id: ", tx_id._transaction_id);
 
         // createCar chaincode function - requires 5 args, ex: args: ['CAR12', 'Honda', 'Accord', 'Black', 'Tom'],
@@ -125,14 +125,14 @@ class FabricUser{
             //targets: let default to the peer assigned to the client
             chaincodeId: 'claims',
             fcn: funcName,
-            args: this.toStringArray(argsArray),
+            args: obj.toStringArray(argsArray),
             chainId: 'mychannel',
             txId: tx_id
         };
 
 
         // send the transaction proposal to the peers
-        return channel.sendTransactionProposal(request).then((results) => {
+        return obj.channel.sendTransactionProposal(request).then((results) => {
         var proposalResponses = results[0];
         var proposal = results[1];
         let isProposalGood = false;
@@ -160,12 +160,12 @@ class FabricUser{
             var transaction_id_string = tx_id.getTransactionID(); //Get the transaction ID string to be used by the event processing
             var promises = [];
 
-            var sendPromise = channel.sendTransaction(request);
+            var sendPromise = obj.channel.sendTransaction(request);
             promises.push(sendPromise); //we want the send transaction first, so that we know where to check status
 
             // get an eventhub once the fabric client has a user assigned. The user
             // is required bacause the event registration must be signed
-            let event_hub = channel.newChannelEventHub(peer);
+            let event_hub = obj.channel.newChannelEventHub(peer);
 
             // using resolve the promise so that result status may be processed
             // under the then clause rather than having the catch clause process
