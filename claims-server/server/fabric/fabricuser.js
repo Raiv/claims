@@ -71,7 +71,7 @@ class FabricUser{
         let argsArray = Array.prototype.slice.call(arguments);
         let cb = argsArray.shift();
         let funcName = argsArray.shift();
-
+        console.log(argsArray);
         const request = {
             //targets : --- letting this default to the peers assigned to the channel
             chaincodeId: 'claims',
