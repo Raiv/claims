@@ -78,7 +78,7 @@ class FabricUser{
             fcn: funcName,
             args: this.toStringArray(argsArray)
         };
-
+        console.log(request.args);
         // send the query proposal to the peer
         return this.channel.queryByChaincode(request).then((query_responses) => {
         console.log("Query has completed, checking results");
