@@ -161,9 +161,9 @@ class Board extends React.Component {
   render() {
     return (
       <div>
-        <BoardAddRow url='http://localhost:5000/api/claim'/>
+        <BoardAddRow url='http://188.246.233.3:5000/api/claim'/>
         <p/>
-        <MyTable data = {this.props.data} url='http://localhost:5000/api/claims' pollInterval={20000}/>
+        <MyTable data = {this.props.data} url='http://188.246.233.3:5000/api/claims' pollInterval={20000}/>
       </div>
     );
   }
