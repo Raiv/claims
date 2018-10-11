@@ -14,13 +14,13 @@ class Claim {
 
     }
 
-    static findById(claimid){
-        return fabricUser.query("queryClaim",claimid);
+    static findById(cb,claimid){
+        return fabricUser.query(cb,"queryClaim",claimid);
     }
 
-    save(claimid,date,text){
+    save(cb){
         
-        return FabricUser.invoke("createClaim",claimid,date,text);
+        return FabricUser.invoke(cb,"createClaim",this.id,this.date,this.text);
     }
  
     display() {

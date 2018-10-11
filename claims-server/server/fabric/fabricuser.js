@@ -110,6 +110,7 @@ class FabricUser{
         }
 
         let argsArray = Array.prototype.slice.call(arguments);
+        let cb = argsArray.shift();
         let funcName = argsArray.shift();
         let channel = this.channel;
 
@@ -212,19 +213,19 @@ class FabricUser{
                 console.log('Successfully sent transaction to the orderer.');
             } else {
                 console.error('Failed to order the transaction. Error code: ' + results[0].status);
-                return results[0].status;
+                return cb(results[0].status,null);
             }
 
             if(results && results[1] && results[1].event_status === 'VALID') {
                 console.log('Successfully committed the change to the ledger by the peer');
-                return results[0].status;
+                return cb(null,results[0].status);
             } else {
                 console.log('Transaction failed to be committed to the ledger due to ::'+results[1].event_status);
-                return results[1].event_status;
+                return cb(results[1].event_status,null);
             }
         }).catch((err) => {
             console.error('Failed to invoke successfully :: ' + err);
-            return err;
+            return cb(err,null);
         });
     }
 
