@@ -13,9 +13,9 @@ class FabricUser{
         // setup the fabric network
         let channel = fabric_client.newChannel('mychannel');
         let peer = fabric_client.newPeer('grpc://localhost:7051');
-        let peer2 = fabric_client.newPeer('grpc://localhost:8051');
+      //  let peer2 = fabric_client.newPeer('grpc://localhost:8051');
         channel.addPeer(peer);
-        channel.addPeer(peer2);
+     //   channel.addPeer(peer2);
         var order = fabric_client.newOrderer('grpc://localhost:7050')
         channel.addOrderer(order);
 
