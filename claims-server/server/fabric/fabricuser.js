@@ -126,6 +126,7 @@ class FabricUser{
         // must send the proposal to endorsing peers
         var request = {
             //targets: let default to the peer assigned to the client
+            targets: [obj.peer],
             chaincodeId: 'claims',
             fcn: funcName,
             args: obj.toStringArray(argsArray),
