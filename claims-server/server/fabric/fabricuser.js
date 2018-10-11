@@ -64,7 +64,7 @@ class FabricUser{
 
     query(){
 // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
-
+        let obj=this;
         if(arguments.length<1){
             throw new Error('Nothing to query!');
         }
@@ -79,7 +79,7 @@ class FabricUser{
         };
 
         // send the query proposal to the peer
-        return channel.queryByChaincode(request).then((query_responses) => {
+        return this.channel.queryByChaincode(request).then((query_responses) => {
         console.log("Query has completed, checking results");
         // query_responses could have more than one  results if there multiple peers were used as targets
         if (query_responses && query_responses.length == 1) {
