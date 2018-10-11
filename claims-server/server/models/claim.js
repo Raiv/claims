@@ -20,7 +20,7 @@ class Claim {
 
     save(cb){
         
-        return FabricUser.invoke(cb,"createClaim",this.id,this.date,this.text);
+        return fabricUser.invoke(cb,"createClaim",this.id,this.date,this.text);
     }
  
     display() {
