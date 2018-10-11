@@ -14,7 +14,8 @@ class FabricUser{
         let channel = fabric_client.newChannel('mychannel');
         let peer = fabric_client.newPeer('grpc://localhost:7051');
         channel.addPeer(peer);
-
+        var order = fabric_client.newOrderer('grpc://localhost:7050')
+        channel.addOrderer(order);
 
         let member_user_tmp=null;
         let store_path = path.join(__dirname, '../../../claims/hfc-key-store');
