@@ -30,7 +30,7 @@ module.exports = {
      * article_id
      */
     getClaim: (req, res, next) => {
-        Claim.findById(req.params.id,(err, claim)=> {
+        Claim.findById((err, claim)=> {
             if (err)
                 res.send(err)
             else if (!article)
@@ -38,6 +38,6 @@ module.exports = {
             else
                 res.send(claim)
             next()            
-        })
+        },req.params.id)
     }
 }
