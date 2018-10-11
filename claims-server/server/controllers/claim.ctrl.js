@@ -6,7 +6,7 @@ module.exports = {
         new Claim(id,date,text).save((err, outClaim) => {
             if (err)
                 res.send(err)
-            else if (!article)
+            else if (!outClaim)
                 res.send(400)
             else {
                 res.send(outClaim)

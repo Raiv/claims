@@ -65,10 +65,11 @@ class FabricUser{
     query(){
 // create the key value store as defined in the fabric-client/config/default.json 'key-value-store' setting
         let obj=this;
-        if(arguments.length<1){
+        if(arguments.length<2){
             throw new Error('Nothing to query!');
         }
         let argsArray = Array.prototype.slice.call(arguments);
+        let cb = argsArray.shift();
         let funcName = argsArray.shift();
 
         const request = {
@@ -85,10 +86,10 @@ class FabricUser{
         if (query_responses && query_responses.length == 1) {
             if (query_responses[0] instanceof Error) {
                 console.error("error from query = ", query_responses[0]);
-                return JSON.stringify(query_responses[0]);
+                return cb(JSON.stringify(query_responses[0]),null);
             } else {
                 console.log("Response is ", query_responses[0].toString());
-                return query_responses[0].toString();
+                return cb(null,query_responses[0].toString());
             }
             
         } else {
@@ -96,7 +97,7 @@ class FabricUser{
         }
         }).catch((err) => {
             console.error('Failed to query successfully :: ' + err);
-            return JSON.stringify(err);
+            return cb(err,null);
         });
 
     }

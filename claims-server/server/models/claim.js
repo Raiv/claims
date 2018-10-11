@@ -9,8 +9,9 @@ class Claim {
         this.date = date;
     }
 
-    static findAll(){
-        return fabricUser.query("queryAllClaims");
+    static findAll(cb){
+        let claim= fabricUser.query("queryAllClaims");
+        
     }
 
     static findById(claimid){
