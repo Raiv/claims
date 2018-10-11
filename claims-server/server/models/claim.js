@@ -10,8 +10,8 @@ class Claim {
     }
 
     static findAll(cb){
-        let claim= fabricUser.query("queryAllClaims");
-        
+        let claim= fabricUser.query(cb,"queryAllClaims");
+
     }
 
     static findById(claimid){
