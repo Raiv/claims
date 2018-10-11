@@ -49,7 +49,7 @@ class FabricUser{
 
     }
 
-    toStringArray(input){
+    toStringArray(input: any =[]){
         let array = [];
         if(typeof(input)!=='undefined'){
             input.array.forEach(element => {
