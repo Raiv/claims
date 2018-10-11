@@ -2,8 +2,9 @@ const Claim = require('../models/claim')
 
 module.exports = {
     addClaim: (req, res, next) => {
-        let { id,date,text } = req.body
-        new Claim(id,date,text).save((err, outClaim) => {
+        let { claimNumber,date,text } = req.body
+        console.log(req.body)
+        new Claim(claimNumber,date,text).save((err, outClaim) => {
             if (err)
                 res.send(err)
             else if (!outClaim)
@@ -38,6 +39,6 @@ module.exports = {
             else
                 res.send(claim)
             next()            
-        },req.params.id)
+        },req.params.claimNumber)
     }
 }

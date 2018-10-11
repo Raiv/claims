@@ -4,8 +4,8 @@ import './App.css';
 import $  from 'jquery';
 
 var dataGlobal = [
-  {id: "claim1", date: "Pete Hunt", text: "This is one claim"},
-  {id: "claim2", date: "Jordan Walke", text: "This is *another* claim"}
+  {claimNumber: "claim1", date: "Pete Hunt", text: "This is one claim"},
+  {claimNumber: "claim2", date: "Jordan Walke", text: "This is *another* claim"}
 ];
 
 class BoardRow extends Component {
@@ -19,7 +19,7 @@ class BoardRow extends Component {
   render() {
     return (
       <div className="board-row">
-          <BoardCell  value={this.props.claim.id}/>
+          <BoardCell  value={this.props.claim.claimNumber}/>
           <BoardCell  value={this.props.claim.date}/>
           <BoardCell  value={this.props.claim.text}/>
       </div>
@@ -77,11 +77,11 @@ class MyTable extends Component{
 class BoardAddRow extends Component {
   constructor(props) {
     super(props);
-    this.state={id: '', date: '', text: ''};
+    this.state={claimNumber: '', date: '', text: ''};
   }
 
   handleIdChange(e) {
-    this.setState({id: e.target.value});
+    this.setState({claimNumber: e.target.value});
   }
 
   handleDateChange(e) {
@@ -94,23 +94,39 @@ class BoardAddRow extends Component {
 
   handleSubmit(e) {
    // e.preventDefault();
-    var id = this.state.id.trim();
+    var claimNumber = this.state.claimNumber.trim();
     var text = this.state.text.trim();
     var date = this.state.date.trim();
-    if (!id || !text || !date) {
+    if (!claimNumber || !text || !date) {
       return;
     }
-    dataGlobal.push({id: id, date: date, text: text});
+    dataGlobal.push({claimNumber: claimNumber, date: date, text: text});
 
     // TODO: отправить запрос на сервер
-    this.setState({id: '', date: '', text: ''});
+
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      method: "POST",
+      contentType: "application/json; charset=utf-8",
+      data: JSON.stringify({claimNumber: claimNumber, date: date, text: text}),
+      processData:false,
+      cache: false,
+      success: function(data) {
+       // this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+    //this.setState({claimNumber: '', date: '', text: ''});
   }
 
   render() {
     return (
       <form className="boardForm">
         <input type="text" size="40" name="id"
-                    value={this.state.id} 
+                    value={this.state.claimNumber} 
                     placeholder="claim num"
                     onChange={this.handleIdChange.bind(this)}/>
         <input type="text" size="40" name="date"
@@ -136,7 +152,7 @@ class BoardCell extends Component {
   }
 
   render() {
-    return <input type="text" size="40" name="claimid" value = {this.props.value} ></input>
+    return <input type="text" size="40" name="claimid" value = {this.props.value} readOnly="true" ></input>
   }
 }
 
@@ -145,9 +161,9 @@ class Board extends React.Component {
   render() {
     return (
       <div>
-        <BoardAddRow />
+        <BoardAddRow url='http://localhost:5000/api/claim'/>
         <p/>
-        <MyTable data = {this.props.data} url='http://localhost:5000/api/claims' pollInterval={2000}/>
+        <MyTable data = {this.props.data} url='http://localhost:5000/api/claims' pollInterval={20000}/>
       </div>
     );
   }

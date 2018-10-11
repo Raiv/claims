@@ -17,10 +17,10 @@ class FabricUser{
      //   channel.addPeer(peer2);
         var order = fabric_client.newOrderer('grpc://188.246.233.3:7050')
         let peer = fabric_client.newPeer('grpc://188.246.233.3:7051');
-        let peer2 = fabric_client.newPeer('grpc://188.246.233.3:8051');
+      //  let peer2 = fabric_client.newPeer('grpc://188.246.233.3:8051');
         channel.addOrderer(order);
         channel.addPeer(peer);
-        channel.addPeer(peer2);
+      //  channel.addPeer(peer2);
 
         let member_user_tmp=null;
         let store_path = path.join(__dirname, '../../../claims/hfc-key-store');
@@ -58,6 +58,7 @@ class FabricUser{
 
     toStringArray(input){
         let array = [];
+        console.log(input)
         if(typeof(input)!=='undefined' && input!== null&& input.length>0){
             input.forEach(element => {
                 array.push(element.toString());
@@ -115,6 +116,8 @@ class FabricUser{
         if(arguments.length<2){
             throw new Error('Invoke without args!');
         }
+        console.log("Arguments: ", arguments);
+
         let obj=this;
         let argsArray = Array.prototype.slice.call(arguments);
         let cb = argsArray.shift();

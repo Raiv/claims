@@ -3,8 +3,8 @@
 const fabricUser = require("../fabric/fabricuser");
 
 class Claim {
-    constructor(id,date,text) {
-        this.id = id;
+    constructor(claimNumber,date,text) {
+        this.claimNumber = claimNumber;
         this.text = text;
         this.date = date;
     }
@@ -20,11 +20,11 @@ class Claim {
 
     save(cb){
         
-        return fabricUser.invoke(cb,"createClaim",this.id,this.date,this.text);
+        return fabricUser.invoke(cb,"createClaim",this.claimNumber,this.date,this.text);
     }
  
     display() {
-        console.log(this.id +" "+ this.text+" "+this.date);
+        console.log(this.claimNumber +" "+ this.text+" "+this.date);
     }
  }
 
