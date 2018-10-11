@@ -12,7 +12,7 @@ class FabricUser{
         let fabric_client = new Fabric_Client();
         // setup the fabric network
         let channel = fabric_client.newChannel('mychannel');
-        let peer = fabric_client.newPeer('grpc://localhost:8051');
+        let peer = fabric_client.newPeer('grpc://localhost:7051');
       //  let peer2 = fabric_client.newPeer('grpc://localhost:8051');
         channel.addPeer(peer);
      //   channel.addPeer(peer2);
