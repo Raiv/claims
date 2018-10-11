@@ -12,9 +12,11 @@ class FabricUser{
         let fabric_client = new Fabric_Client();
         // setup the fabric network
         let channel = fabric_client.newChannel('mychannel');
+
+        
      //   channel.addPeer(peer2);
         var order = fabric_client.newOrderer('grpc://localhost:7050')
-        let peer = fabric_client.newPeer('grpc://localhost:7051');
+         //       let peer = fabric_client.newPeer('grpc://localhost:7051');
         let peer2 = fabric_client.newPeer('grpc://localhost:8051');
         channel.addOrderer(order);
         channel.addPeer(peer);
@@ -169,7 +171,7 @@ class FabricUser{
 
             // get an eventhub once the fabric client has a user assigned. The user
             // is required bacause the event registration must be signed
-            let event_hub = obj.channel.newChannelEventHub(peer);
+            let event_hub = obj.channel.newChannelEventHub(obj.peer);
 
             // using resolve the promise so that result status may be processed
             // under the then clause rather than having the catch clause process
