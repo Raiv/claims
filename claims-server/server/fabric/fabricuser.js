@@ -12,13 +12,14 @@ class FabricUser{
         let fabric_client = new Fabric_Client();
         // setup the fabric network
         let channel = fabric_client.newChannel('mychannel');
-        let peer = fabric_client.newPeer('grpc://localhost:7051');
-      //  let peer2 = fabric_client.newPeer('grpc://localhost:8051');
-        
      //   channel.addPeer(peer2);
         var order = fabric_client.newOrderer('grpc://localhost:7050')
+        let peer = fabric_client.newPeer('grpc://localhost:7051');
+        let peer2 = fabric_client.newPeer('grpc://localhost:8051');
         channel.addOrderer(order);
         channel.addPeer(peer);
+        channel.addPeer(peer2);
+
         let member_user_tmp=null;
         let store_path = path.join(__dirname, '../../../claims/hfc-key-store');
         console.log('Store path:'+store_path);
